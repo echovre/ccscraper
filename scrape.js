@@ -55,7 +55,7 @@ async function loginCCLI(browserPage,url){
 }
 
 async function parsePage(pageURL){
-      let browser = await puppeteer.launch({headless: false});
+      let browser = await puppeteer.launch({headless: true});
       let page = await browser.newPage();
       await loginPC(page,planningCenterLoginPage);
       console.log("Loading page: "+pageURL);
@@ -92,7 +92,10 @@ async function parsePage(pageURL){
 }
 
 async function parseNewCcli(ccliURL){
-  let browser = await puppeteer.launch({headless: false});
+  let browser = await puppeteer.launch({
+                    headless: true,
+                    args: ['--no-sandbox', '--disable-setuid-sandbox']
+                });
   let page = await browser.newPage();
   await loginCCLI(page,ccliLoginPage);
   let text=await parseEach(page,ccliURL);
