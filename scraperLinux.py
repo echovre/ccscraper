@@ -24,8 +24,9 @@ if len(sys.argv)<=1:
     sys.exit()
 
 ### do it with firefox
-firefoxProfile = webdriver.FirefoxProfile(r'C:\Users\windows\AppData\Roaming\Mozilla\Firefox\Profiles\2ieb5mqz.default-release')
-browser = webdriver.Firefox(firefox_profile=firefoxProfile)
+###firefoxProfile = webdriver.FirefoxProfile(r'C:\Users\windows\AppData\Roaming\Mozilla\Firefox\Profiles\2ieb5mqz.default-release')
+firefoxProfile = webdriver.FirefoxProfile('/home/echo/.mozilla/firefox//146ft793.default-release')
+browser = webdriver.Firefox(firefox_profile=firefoxProfile,executable_path='/usr/bin/geckodriver')
 
 ### to do it with chrome, uncomment these lines and comment the above (firefox) lines
 #opts = webdriver.ChromeOptions() 
@@ -117,7 +118,7 @@ class CCLI_scraper():
             emailField = browser.find_element_by_id('EmailAddress')
             emailField.send_keys(email)
             passwordField = browser.find_element_by_id('Password')
-            passwordField.send_keys(password);
+            passwordField.send_keys(password)
             signinButton = browser.find_element_by_id('sign-in')
             signinButton.click()
             time.sleep(1)
@@ -129,7 +130,7 @@ class CCLI_scraper():
     def scrapePage(self,page):
         browser.get(page)
         if(self.clickSignIn()): print("logged in.")
-        # browser.get(page) #re-get the page
+        #browser.get(page) #re-get the page
         
         name=self.getSongName(browser)
         authors=self.getAuthors(browser)
